@@ -1,32 +1,26 @@
-import { HttpResponse, ok } from '@/application/helpers'
+import { forbidden, HttpResponse, ok } from '@/application/helpers'
 import { Middleware } from '@/application/middlewares'
-import { ValidationBuilder as Builder } from '@/application/validation'
-import { Validator } from '@/domain/contracts/gateways'
-import { AuthorizationTokenValidateUseCase } from '@/domain/use-cases/authorization-token'
+import { RequiredString } from '@/application/validation'
 
-type HttpRequest = { authorization: string, origin: string, roles: string[] }
-type Model = Error | {
-  user: {
-    name: string
-    email: string
-    roles: string[]
-  }
-}
+type HttpRequest = { authorization: string }
+type Model = Error | { userId: string }
+type Authorize = (input: { token: string }) => Promise<string>
 
-export class AuthenticationMiddleware extends Middleware {
-  constructor (private readonly authorizationTokenDecode: AuthorizationTokenValidateUseCase) {
-    super()
-  }
+export class AuthenticationMiddleware implements Middleware {
+  constructor (private readonly authorize: Authorize) {}
 
-  async perform ({ authorization, origin, roles }: HttpRequest): Promise<HttpResponse<Model>> {
-    const tokenDecoded = await this.authorizationTokenDecode({ token: authorization, domain: origin, roles })
-
-    return ok(tokenDecoded)
+  async handle ({ authorization }: HttpRequest): Promise<HttpResponse<Model>> {
+    if (!this.validate({ authorization })) return forbidden()
+    try {
+      const userId = await this.authorize({ token: authorization })
+      return ok({ userId })
+    } catch {
+      return forbidden()
+    }
   }
 
-  override buildValidators (data: HttpRequest): Validator[] {
-    return [
-      ...Builder.of({ value: data.authorization, fieldName: 'authorization' }).required().build()
-    ]
+  private validate ({ authorization }: HttpRequest): boolean {
+    const error = new RequiredString(authorization, 'authorization').validate()
+    return error === undefined
   }
 }

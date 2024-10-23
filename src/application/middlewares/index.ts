@@ -1,6 +1,2 @@
 export * from './authentication'
-export * from './domain'
-export * from './domain-tcp'
-export * from './ip-address'
 export * from './middleware'
-export * from './middleware-tcp'
