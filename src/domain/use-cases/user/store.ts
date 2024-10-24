@@ -13,6 +13,13 @@ export const setupUserStore: Setup = ({ firebase }) => async input => {
 
   try {
     const user: UserCredential = await createUserWithEmailAndPassword(auth, input.email, input.password)
+
+    // Atualiza o perfil do usuário com nome
+    // await updateProfile(user, {
+    //   displayName,
+    //   phoneNumber // Firebase Auth não armazena phoneNumber diretamente
+    // })
+
     return user
   } catch (error: any) {
     console.log(error)
