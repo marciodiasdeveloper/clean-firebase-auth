@@ -17,9 +17,7 @@ export const makeUserStoreUseCase = (): UserStoreUseCase => {
     appId: env.firebase.appId
   }
 
-  // Initialize Firebase
   const firebase: FirebaseApp = initializeApp(firebaseConfig)
 
-  console.log(' passou')
   return setupUserStore({ firebase })
 }
