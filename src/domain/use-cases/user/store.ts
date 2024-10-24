@@ -7,7 +7,7 @@ type Output = UserStore.Output
 
 export type UserStoreUseCase = (input: Input) => Promise<Output>
 
-export const setupUserStore: Setup = (firebase) => async input => {
+export const setupUserStore: Setup = ({ firebase }) => async input => {
   console.log(' setupUseStore')
   const auth = getAuth(firebase)
 
@@ -16,5 +16,5 @@ export const setupUserStore: Setup = (firebase) => async input => {
 
   console.log(user)
 
-  return { message: 'pong' }
+  return user
 }
