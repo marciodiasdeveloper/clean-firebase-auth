@@ -7,7 +7,7 @@ import {
   UserStoreUseCase
 } from '@/domain/use-cases'
 
-export const makeLoginStoreUseCase = (): UserStoreUseCase => {
+export const makeUserStoreUseCase = (): UserStoreUseCase => {
   const firebaseConfig = {
     apiKey: env.firebase.apiKey,
     authDomain: env.firebase.authDomain,
