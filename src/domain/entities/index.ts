@@ -1,7 +1,6 @@
 export * from './errors'
 export * from './access-token'
 export * from './get-domain-url'
-export * from './forgot-password'
 export * from './token'
 export * from './validate-authorization'
 export * from './page-filter'
