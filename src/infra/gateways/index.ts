@@ -1,7 +1,6 @@
 export * from './axios-client'
 export * from './cache'
 export * from './client'
-export * from './connection-default'
 export * from './get-enviroment'
 export * from './hash'
 export * from './hash-handler'

@@ -1,6 +1,5 @@
 export * from './authenticate-middleware'
 export * from './cache'
-export * from './connection-default'
 export * from './get-enviroment'
 export * from './hash'
 export * from './http-client'
