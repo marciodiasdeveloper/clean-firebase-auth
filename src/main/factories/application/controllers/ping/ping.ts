@@ -1,8 +1,9 @@
-import { makePing } from '@/main/factories/domain/use-cases'
+import { makePingUseCase } from '@/main/factories/domain/use-cases'
 import { PingController, Controller } from '@/application/controllers'
 import { makeValidationController } from '@/main/factories/application/decorators'
 
 export const makePingController = (): Controller => {
-  const controller = new PingController(makePing())
+  console.log('ping')
+  const controller = new PingController(makePingUseCase())
   return makeValidationController(controller)
 }

@@ -6,6 +6,6 @@ type Output = Ping.Output
 
 export type PingUseCase = (input: Input) => Promise<Output>
 
-export const setupPing: Setup = () => async input => {
+export const setupPingUseCase: Setup = () => async input => {
   return { message: 'pong' }
 }

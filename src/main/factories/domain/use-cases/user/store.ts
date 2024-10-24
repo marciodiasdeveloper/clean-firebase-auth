@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app'
+import { FirebaseApp, initializeApp } from 'firebase/app'
 import { env } from '@/main/config/env'
 
 import {
@@ -6,7 +6,7 @@ import {
   UserStoreUseCase
 } from '@/domain/use-cases'
 
-export const makeUserStore = (): UserStoreUseCase => {
+export const makeUserStoreUseCase = (): UserStoreUseCase => {
   const firebaseConfig = {
     apiKey: env.firebase.apiKey,
     authDomain: env.firebase.authDomain,
@@ -17,7 +17,8 @@ export const makeUserStore = (): UserStoreUseCase => {
   }
 
   // Initialize Firebase
-  const firebase = initializeApp(firebaseConfig)
+  const firebase: FirebaseApp = initializeApp(firebaseConfig)
 
+  console.log(' passou')
   return setupUserStore({ firebase })
 }
