@@ -3,5 +3,5 @@ import { makePingController } from '@/main/factories/application/controllers'
 import { Router } from 'express'
 
 export default (router: Router): void => {
-  router.post('/ping', adapt(makePingController()))
+  router.get('/ping', adapt(makePingController()))
 }
