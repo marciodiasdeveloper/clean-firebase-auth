@@ -1,6 +1,6 @@
 import { AuthEmailAlreadyInUse } from '@/application/errors'
 import { UserStore } from '@/domain/contracts/gateways'
-import { getAuth, createUserWithEmailAndPassword, UserCredential } from 'firebase/auth'
+import { getAuth, updateProfile, createUserWithEmailAndPassword, UserCredential } from 'firebase/auth'
 import { getFirestore, doc, setDoc } from 'firebase/firestore'
 
 type Setup = (firebase: any) => UserStoreUseCase
@@ -12,18 +12,6 @@ export type UserStoreUseCase = (input: Input) => Promise<Output>
 export const setupUserStore: Setup = ({ firebase }) => async input => {
   const auth = getAuth(firebase)
   const db = getFirestore(firebase) // Atualiza o perfil do usuário com nome
-  // await updateProfile(user, {
-  //   displayName,
-  //   phoneNumber // Firebase Auth não armazena phoneNumber diretamente
-  // })
-
-  // Armazena informações adicionais no Firestore
-  // await setDoc(doc(db, "users", user.uid), {
-  //   email: user.email,
-  //   displayName: displayName,
-  //   phoneNumber: phoneNumber,
-  //   createdAt: new Date().toISOString()
-  // });
 
   try {
     const user: UserCredential = await createUserWithEmailAndPassword(auth, input.email, input.password)
