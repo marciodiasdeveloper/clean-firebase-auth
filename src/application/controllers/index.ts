@@ -1,2 +1,2 @@
 export * from './controller'
-export * from './token'
+export * from './ping'
