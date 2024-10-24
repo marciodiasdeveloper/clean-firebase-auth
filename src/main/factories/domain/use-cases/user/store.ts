@@ -3,7 +3,7 @@ import { env } from '@/main/config/env'
 import 'firebase/auth'
 
 import {
-  setupUserStore,
+  setupLoginStore,
   UserStoreUseCase
 } from '@/domain/use-cases'
 
@@ -21,5 +21,5 @@ export const makeLoginStoreUseCase = (): UserStoreUseCase => {
   const firebase: FirebaseApp = initializeApp(firebaseConfig)
 
   console.log(' passou')
-  return setupUserStore({ firebase })
+  return setupLoginStore({ firebase })
 }
