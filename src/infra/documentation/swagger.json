@@ -1,19 +1,16 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Auth Microservice Documentation",
+    "title": "Madah Firebase Auth",
     "description": "This is an Auth API",
     "version": "0.0.1",
     "contact": {
-      "email": "marcio.dias@telium.com.br"
+      "email": "contato@marciodias.me"
     }
   },
   "servers": [
     {
       "url": "http://localhost:8092/api"
-    },
-    {
-      "url": "https://api.telium.com.br/auth"
     }
   ],
   "paths": {
