@@ -11,7 +11,7 @@ export type UserStoreUseCase = (input: Input) => Promise<Output>
 
 export const setupUserStore: Setup = ({ firebase }) => async input => {
   const auth = getAuth(firebase)
-  const db = getFirestore(app) // Atualiza o perfil do usuário com nome
+  const db = getFirestore(firebase) // Atualiza o perfil do usuário com nome
   // await updateProfile(user, {
   //   displayName,
   //   phoneNumber // Firebase Auth não armazena phoneNumber diretamente
