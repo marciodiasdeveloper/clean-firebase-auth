@@ -1,3 +1,5 @@
+import { UserCredential } from 'firebase/auth'
+
 export interface UserStore {
   store: (input: UserStore.Input) => Promise<UserStore.Output>
 }
@@ -8,7 +10,5 @@ export namespace UserStore {
     email: string
     password: string
   }
-  export type Output = undefined | {
-    message: string
-  }
+  export type Output = undefined | UserCredential
 }
