@@ -1,3 +1,4 @@
+import { AuthEmailAlreadyInUse } from '@/application/errors'
 import { UserStore } from '@/domain/contracts/gateways'
 import { getAuth, createUserWithEmailAndPassword, UserCredential } from 'firebase/auth'
 
@@ -9,7 +10,14 @@ export type UserStoreUseCase = (input: Input) => Promise<Output>
 
 export const setupUserStore: Setup = ({ firebase }) => async input => {
   const auth = getAuth(firebase)
-  const user: UserCredential = await createUserWithEmailAndPassword(auth, input.email, input.password)
 
-  return user
+  try {
+    const user: UserCredential = await createUserWithEmailAndPassword(auth, input.email, input.password)
+    return user
+  } catch (error: any) {
+    console.log(error)
+    if (error.code === 'auth/email-already-in-use') {
+      throw new AuthEmailAlreadyInUse()
+    }
+  }
 }
