@@ -14,7 +14,8 @@ export const setupUserStore: Setup = ({ firebase }) => async input => {
   const db = getFirestore(firebase) // Atualiza o perfil do usuário com nome
 
   try {
-    const user: UserCredential = await createUserWithEmailAndPassword(auth, input.email, input.password)
+    const userCredential: UserCredential = await createUserWithEmailAndPassword(auth, input.email, input.password)
+    const user = userCredential.user
 
     // Atualiza o perfil do usuário com nome
     await updateProfile(user, {
