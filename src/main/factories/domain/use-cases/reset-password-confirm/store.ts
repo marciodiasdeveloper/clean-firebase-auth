@@ -2,11 +2,11 @@ import { FirebaseApp, initializeApp } from 'firebase/app'
 import { env } from '@/main/config/env'
 
 import {
-  setupUserStore,
+  setupLoginStore,
   UserStoreUseCase
 } from '@/domain/use-cases'
 
-export const makeUserStoreUseCase = (): UserStoreUseCase => {
+export const makeForgotPasswordStoreUseCase = (): UserStoreUseCase => {
   const firebaseConfig = {
     apiKey: env.firebase.apiKey,
     authDomain: env.firebase.authDomain,
@@ -18,5 +18,5 @@ export const makeUserStoreUseCase = (): UserStoreUseCase => {
 
   const firebase: FirebaseApp = initializeApp(firebaseConfig)
 
-  return setupUserStore({ firebase })
+  return setupLoginStore({ firebase })
 }
