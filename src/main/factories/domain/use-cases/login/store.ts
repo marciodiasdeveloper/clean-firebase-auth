@@ -1,6 +1,5 @@
 import { FirebaseApp, initializeApp } from 'firebase/app'
 import { env } from '@/main/config/env'
-import 'firebase/auth'
 
 import {
   setupUserStore,
